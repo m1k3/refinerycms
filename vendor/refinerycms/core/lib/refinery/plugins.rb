@@ -1,9 +1,9 @@
 module Refinery
   class Plugins < Array
 
-    def initialize
-      @plugins = []
-    end
+    # def initialize
+    #   @plugins = []
+    # end
 
     def find_by_name(name)
       self.detect { |plugin| plugin.name == name }
@@ -32,19 +32,19 @@ module Refinery
     end
 
     def pathnames
-      self.collect { |p| p.pathname }.compact
+      self.class.new(self.collect { |p| p.pathname }.compact)
     end
 
     def names
-      self.collect { |p| p.name }
+      self.class.new(self.collect { |p| p.name })
     end
 
     def titles
-      self.collect { |p| p.title }
+      self.class.new(self.collect { |p| p.title })
     end
 
     def in_menu
-      self.reject{ |p| p.hide_from_menu }
+      self.class.new(self.reject{ |p| p.hide_from_menu })
     end
 
     def self.active
